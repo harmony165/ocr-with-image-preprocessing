@@ -63,57 +63,74 @@ function App() {
 
   return (
     <div className="App">
-      <input type="file" onChange={onFileChange} />
+      <div style={{ display: "flex", flexDirection: "column" }}>
+        <div className="statusContainer">
+          <h3>OCR Web-app powered by Tesseract.js</h3>
 
-      <button
-        onClick={() => {
-          setProcess(!process);
-        }}
-      >
-        Process image - {process ? "ON" : "OFF"}
-      </button>
-      <div style={{ marginTop: 25 }}>
-        <input
-          type="button"
-          value="Submit"
-          onClick={process ? preProcessedImage : processImage}
-        />
-      </div>
-      <div>
-        <div>{status}</div>
-        <progress value={progress} max={1} />
-      </div>
+          <input
+            type="file"
+            onChange={onFileChange}
+            style={{ marginTop: "2rem" }}
+          />
 
-      {file && (
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            aligntItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <div>
-            <h3>Actual image uploaded</h3>
-            <img
-              src={file}
-              
-              alt="Upload an Image"
-              ref={imageRef}
-            />
+          <button
+            onClick={() => {
+              setProcess(!process);
+            }}
+            style={{ marginTop: "2rem" }}
+          >
+            Process image - {process ? "ON" : "OFF"}
+          </button>
+
+          <input
+            type="button"
+            value="Submit"
+            onClick={process ? preProcessedImage : processImage}
+            style={{ marginTop: "2rem" }}
+          />
+
+          <div
+            style={{
+              marginTop: "2rem",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <div>{status}</div>
+            <progress value={progress} max={1} />
           </div>
-          {process && (
-            <div>
-              <h3>Processed Image</h3>
-              <canvas ref={canvasRef} ></canvas>
-            </div>
-          )}
         </div>
-      )}
+
+        {file && (
+          <div className="imageContainer">
+            <div className="sectionContainer">
+              <h3>Uploaded Image</h3>
+              <img
+                src={file}
+                style={{ display: "none" }}
+                alt="Upload an Image"
+                ref={imageRef}
+              />
+              <img src={file} style={{ width: "100%" }} alt="Upload an Image" />
+            </div>
+            {process && (
+              <div className="sectionContainer">
+                <h3>Processed Image</h3>
+                <canvas ref={canvasRef} style={{ width: "100%" }}></canvas>
+              </div>
+            )}
+          </div>
+        )}
+      </div>
 
       {result !== "" && (
-        <div style={{ marginTop: 20, fontSize: 24, color: "teal" }}>
-          Result: {result}
+        <div className="resultContainer">
+          <h3>Result</h3>
+          <div style={{ marginTop: 20, fontSize: 24, color: "teal" }}>
+            Result: {result}
+          </div>
         </div>
       )}
     </div>

@@ -3,7 +3,7 @@ function preprocessImage(canvas) {
     const image = ctx.getImageData(0,0,canvas.width, canvas.height);
     // blurARGB(image.data, canvas, 1);
     // dilate(image.data, canvas);
-    invertColors(image.data);
+    // invertColors(image.data);
     thresholdFilter(image.data, 0.5);
     return image;
    
